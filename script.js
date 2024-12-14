@@ -20,15 +20,6 @@ const division = (firstNr, secondNr) => {
     return firstNr / secondNr;
 }
 
-// testing the functions
-/*
-console.log(addition(10,37));
-console.log(subtraction(10,37));
-console.log(multiplication(10,37));
-console.log(division(10,37));
-*/
-
-
 const operate = (numberOne, operator, numberTwo) => {
     switch (operator) {
         case '+':
@@ -52,10 +43,70 @@ console.log(operate(20, '+', 30));
 
 let firstNo = 0;
 let operator = "";
-let secondNo = 0;
+let secondNo = 0
+let operationResult = "";
+
+// number listeners 
+const displayFirst = document.querySelector("#display-first");
+const displaySecond = document.querySelector("#display-second");
 
 const numberButtons = document.querySelectorAll(".number-button");
+numberButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+        if (operator === "" && firstNo === 0) {
+            firstNo = button.id;
+            displayFirst.textContent = firstNo;
+        } else if (operator === "" && firstNo !== 0) {
+            firstNo += button.id;
+            displayFirst.textContent = firstNo;
+        } else if (operator !== "" && secondNo === 0) {
+            secondNo = button.id;
+            displaySecond.textContent = secondNo;
+        } else if (secondNo !== 0) {
+            secondNo += button.id;
+            displaySecond.textContent = secondNo;
+        }
+    })
+})
+
+// operator listener
+const displayOperator = document.querySelector("#display-operator");
+
 const operatorButtons = document.querySelectorAll(".operator-button");
+operatorButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+        if (operator === "") {
+            operator = button.id;
+            displayOperator.textContent = operator;
+        }
+    })
+})
 
+// clear button:
 
+const clearButton = document.querySelector("#ac-button");
 
+clearButton.addEventListener("click", () => {
+    displayFirst.textContent = "0";
+    displayOperator.textContent = "";
+    displaySecond.textContent = "";
+    displayResult.textContent = "";
+    firstNo = 0;
+    operator = "";
+    secondNo = 0;
+})
+
+// results button =
+
+const resultsButton = document.querySelector("#results-button");
+const displayResult = document.querySelector("#display-result");
+
+resultsButton.addEventListener("click", () => {
+    if (operator !== "") {
+        firstNo = parseInt(firstNo);
+        secondNo = parseInt(secondNo);
+        operationResult = operate(firstNo, operator, secondNo);
+        displayResult.textContent = ` = ${operationResult}`;
+        displayResult.style.color = "gray";
+    }
+})

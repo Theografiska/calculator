@@ -11,37 +11,40 @@
     <main>
         <div id="calc-frame">
             <div id="calc-screen">
-                <p id="display-content">0</p>
+                <p id="display-first">0</p>
+                <p id="display-operator"></p>
+                <p id="display-second"></p>
+                <p id="display-result"></p>
             </div>
             <div id="calc-button-area">
                 <div id="button-row-one" class="button-row">
-                    <button class="top-side-button">AC</button>
+                    <button id="ac-button" class="top-side-button" >AC</button>
                     <button class="top-side-button">+/-</button>
                     <button class="top-side-button">%</button>
-                    <button class="right-side-button" class="operator-button">/</button>
+                    <button id="/" class="right-side-button operator-button">/</button>
                 </div>
                 <div id="button-row-two" class="button-row">
-                    <button class="number-button">7</button>
-                    <button class="number-button">8</button>
-                    <button class="number-button">9</button>
-                    <button class="right-side-button" class="operator-button">X</button>
+                    <button id="7" class="number-button">7</button>
+                    <button id="8" class="number-button">8</button>
+                    <button id="9" class="number-button">9</button>
+                    <button id="x" class="right-side-button operator-button">X</button>
                 </div>
                 <div id="button-row-three" class="button-row">
-                    <button class="number-button">4</button>
-                    <button class="number-button">5</button>
-                    <button class="number-button">6</button>
-                    <button class="right-side-button" class="operator-button">-</button>
+                    <button id="4" class="number-button">4</button>
+                    <button id="5" class="number-button">5</button>
+                    <button id="6" class="number-button">6</button>
+                    <button id="-" class="right-side-button operator-button">-</button>
                 </div>
                 <div id="button-row-four" class="button-row">
-                    <button class="number-button">1</button>
-                    <button class="number-button">2</button>
-                    <button class="number-button">3</button>
-                    <button class="right-side-button" class="operator-button">+</button>
+                    <button id="1" class="number-button">1</button>
+                    <button id="2" class="number-button">2</button>
+                    <button id="3" class="number-button">3</button>
+                    <button id="+" class="right-side-button operator-button">+</button>
                 </div>
                 <div id="button-row-five" class="button-row">
-                    <button class="number-button" id="zero-button">0</button>
+                    <button id="0" class="number-button">0</button>
                     <button>,</button>
-                    <button class="right-side-button">=</button>
+                    <button id="results-button" class="right-side-button">=</button>
                 </div>
             </div>
         </div>

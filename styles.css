@@ -31,6 +31,7 @@ body {
 
 #calc-screen {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: end;
     height: 30%;
@@ -68,9 +69,10 @@ button {
     width: 6rem;
     border-radius: 50%;
     cursor: pointer;
+    border: 1px solid black;
 }
 
-#zero-button {
+#\30 { /* this is the unicode escape for number 0 */
     width: 50%;
     border-radius: 45%;
     padding-left: 2rem;
