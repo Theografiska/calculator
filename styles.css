@@ -31,15 +31,24 @@ body {
 
 #calc-screen {
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
-    align-items: center;
+    align-content: center;
     justify-content: end;
     height: 30%;
     font-size: 4rem;
 }
 
-#calc-screen p {
+#calc-screen div p {
     text-align: right;
+}
+
+#display-first, #display-second, #display-operaotr {
+    display: inline-flex;
+}
+
+#display-numbers {
+    display: flex;
 }
 
 #calc-button-area {
@@ -77,6 +86,11 @@ button {
     border-radius: 45%;
     padding-left: 2rem;
     text-align: left;
+}
+
+#ac-button {
+    width: 50%;
+    border-radius: 45%;
 }
 
 footer {

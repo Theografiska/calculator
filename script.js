@@ -17,7 +17,11 @@ const multiplication = (firstNr, secondNr) => {
 
 // division:
 const division = (firstNr, secondNr) => {
+    if (secondNr === 0) {
+        return 'Error this, error that';
+    } else {
     return firstNr / secondNr;
+    }
 }
 
 const operate = (numberOne, operator, numberTwo) => {
@@ -37,18 +41,22 @@ const operate = (numberOne, operator, numberTwo) => {
     }
 }
 
-/*
-console.log(operate(20, '+', 30));
-*/
-
 let firstNo = 0;
 let operator = "";
-let secondNo = 0
+let secondNo = "";
 let operationResult = "";
 
-// number listeners 
+// div to hold all firstNo, operator, secondNo
+const displayNumbers = document.querySelector("#display-numbers");
+
 const displayFirst = document.querySelector("#display-first");
 const displaySecond = document.querySelector("#display-second");
+const displayOperator = document.querySelector("#display-operator");
+
+// div to hold result:
+const displayResult = document.querySelector("#display-result");
+
+// number listener
 
 const numberButtons = document.querySelectorAll(".number-button");
 numberButtons.forEach((button) => {
@@ -59,10 +67,10 @@ numberButtons.forEach((button) => {
         } else if (operator === "" && firstNo !== 0) {
             firstNo += button.id;
             displayFirst.textContent = firstNo;
-        } else if (operator !== "" && secondNo === 0) {
+        } else if (operator !== "" && secondNo === "") {
             secondNo = button.id;
             displaySecond.textContent = secondNo;
-        } else if (secondNo !== 0) {
+        } else if (secondNo !== "") {
             secondNo += button.id;
             displaySecond.textContent = secondNo;
         }
@@ -70,7 +78,6 @@ numberButtons.forEach((button) => {
 })
 
 // operator listener
-const displayOperator = document.querySelector("#display-operator");
 
 const operatorButtons = document.querySelectorAll(".operator-button");
 operatorButtons.forEach((button) => {
@@ -78,11 +85,22 @@ operatorButtons.forEach((button) => {
         if (operator === "") {
             operator = button.id;
             displayOperator.textContent = operator;
-        }
+        } else if (operator !== "" && operationResult !== "") {
+            firstNo = operationResult;
+            displayFirst.textContent = firstNo;
+            displayNumbers.style.color = "white";
+            displayNumbers.style.fontSize = "4rem";
+            operationResult = "";
+            displayResult.textContent = "";
+            operator = button.id;
+            displayOperator.textContent = operator;
+            secondNo = "";
+            displaySecond.textContent = "";
+        } 
     })
 })
 
-// clear button:
+// clear listener:
 
 const clearButton = document.querySelector("#ac-button");
 
@@ -91,22 +109,36 @@ clearButton.addEventListener("click", () => {
     displayOperator.textContent = "";
     displaySecond.textContent = "";
     displayResult.textContent = "";
+    displayNumbers.style.color = "white";
+    displayNumbers.style.fontSize = "4rem";
     firstNo = 0;
     operator = "";
-    secondNo = 0;
+    secondNo = "";
 })
 
 // results button =
 
 const resultsButton = document.querySelector("#results-button");
-const displayResult = document.querySelector("#display-result");
 
 resultsButton.addEventListener("click", () => {
     if (operator !== "") {
         firstNo = parseInt(firstNo);
         secondNo = parseInt(secondNo);
-        operationResult = operate(firstNo, operator, secondNo);
-        displayResult.textContent = ` = ${operationResult}`;
-        displayResult.style.color = "gray";
+        operationResult = parseFloat(operate(firstNo, operator, secondNo).toFixed(2));
+        /*operationResult = operationResult.toFixed(2);
+        operationResult = parseFloat(operationResult);*/
+        displayResult.textContent = operationResult;
+        displayNumbers.style.color = "gray";
+        displayNumbers.style.fontSize = "2rem";
     }
 })
+
+/* problems: 
+
+- rounding issues. First it rounds, but if you do 
+another operation with a decimal place then it doesn't round
+
+- using operators multiple times without = button
+
+- too verbose (add some functions to make it simpler?)
+*/
