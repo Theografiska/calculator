@@ -28,25 +28,34 @@ console.log(multiplication(10,37));
 console.log(division(10,37));
 */
 
-let numberOne = 20;
-let operator = 'plus';
-let numberTwo = 30;
 
 const operate = (numberOne, operator, numberTwo) => {
     switch (operator) {
-        case 'plus':
+        case '+':
             return addition(numberOne, numberTwo);
             break;
-        case 'minus':
+        case '-':
             return subtraction(numberOne, numberTwo);
             break;
-        case 'multiply':
+        case 'x':
             return multiplication(numberOne, numberTwo);
             break;
-        case 'divide':
+        case '/':
             return division(numberOne, numberTwo);
             break;
     }
 }
 
-console.log(operate(20, 'plus', 30));
+/*
+console.log(operate(20, '+', 30));
+*/
+
+let firstNo = 0;
+let operator = "";
+let secondNo = 0;
+
+const numberButtons = document.querySelectorAll(".number-button");
+const operatorButtons = document.querySelectorAll(".operator-button");
+
+
+
