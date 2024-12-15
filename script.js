@@ -25,16 +25,16 @@ const division = (firstNr, secondNr) => {
 const operate = (numberOne, operator, numberTwo) => {
     switch (operator) {
         case '+':
-            return parseFloat(addition(numberOne, numberTwo)).toFixed(2);
+            return parseFloat(addition(numberOne, numberTwo).toFixed(2));
             break;
         case '-':
-            return parseFloat(subtraction(numberOne, numberTwo)).toFixed(2);
+            return parseFloat(subtraction(numberOne, numberTwo).toFixed(2));
             break;
         case 'x':
-            return parseFloat(multiplication(numberOne, numberTwo)).toFixed(2);
+            return parseFloat(multiplication(numberOne, numberTwo).toFixed(2));
             break;
         case '/':
-            return parseFloat(division(numberOne, numberTwo)).toFixed(2);
+            return parseFloat(division(numberOne, numberTwo).toFixed(2));
             break;
     }
 }
@@ -157,9 +157,15 @@ resultsButton.addEventListener("click", () => {
     }
 })
 
-const getResult = () => {
+/*const getResult = () => {
     firstNo = Number(parseFloat(firstNo).toFixed(2));
     secondNo = Number(parseFloat(secondNo).toFixed(2));
+    operationResult = operate(firstNo, operator, secondNo);
+}*/
+
+const getResult = () => {
+    firstNo = Number(firstNo);
+    secondNo = Number(secondNo);
     operationResult = operate(firstNo, operator, secondNo);
 }
 
