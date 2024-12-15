@@ -218,12 +218,3 @@ deleteButton.addEventListener("click", () => {
         displayStyleReset(); 
     }
 })
-
-
-/* 
-
-to add:
-
-- ability to delete digits
-
-*/
