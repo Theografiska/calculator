@@ -88,8 +88,8 @@ button {
     text-align: left;
 }
 
-#ac-button {
-    width: 50%;
+#ac-button, #del-button {
+    width: 37.5%;
     border-radius: 45%;
 }
 
