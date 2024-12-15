@@ -100,6 +100,8 @@ operatorButtons.forEach((button) => {
 
 const operateAgainBeforeResult = () => {
     getResult();
+    firstNo = operationResult;
+    operationResult = "";
     displayFirst.textContent = firstNo;
 
     secondNo = "";
@@ -115,12 +117,6 @@ const operateAfterResult = () => {
     displaySecond.textContent = "";
 
     displayReset(); 
-}
-
-// set operator:
-const setOperator = () => {
-    operator = button.id;
-    displayOperator.textContent = operator;
 }
 
 // reset display style: 
@@ -139,12 +135,13 @@ clearButton.addEventListener("click", () => {
     displayFirst.textContent = "0";
     displayOperator.textContent = "";
     displaySecond.textContent = "";
-    displayResult.textContent = "";
-    displayNumbers.style.color = "white";
-    displayNumbers.style.fontSize = "4rem";
+    displayReset();
+
     firstNo = 0;
     operator = "";
     secondNo = "";
+
+
 })
 
 // results button =
@@ -166,12 +163,8 @@ const getResult = () => {
     operationResult = operate(firstNo, operator, secondNo);
 }
 
-/* problems: 
+/* 
 
-- rounding issues. First it rounds, but if you do 
-another operation with a decimal place then it doesn't round
+problems: 
 
-- using operators multiple times without = button
-
-- too verbose (add some functions to make it simpler?)
 */
