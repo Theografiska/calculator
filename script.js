@@ -1,6 +1,4 @@
-
-
-// operations:
+// basic operations:
 const addition = (firstNr, secondNr) => {
     return firstNr + secondNr;
 }
@@ -17,7 +15,7 @@ const division = (firstNr, secondNr) => {
     return firstNr / secondNr;
 }
 
-// main function:
+// main function to complete the operation:
 const operate = (numberOne, operator, numberTwo) => {
     switch (operator) {
         case '+':
@@ -35,7 +33,7 @@ const operate = (numberOne, operator, numberTwo) => {
     }
 }
 
-let firstNr = 0;
+let firstNr = "0";
 let operator = "";
 let secondNr = "";
 let operationResult = "";
@@ -55,9 +53,9 @@ const numberButtons = document.querySelectorAll(".number-button");
 
 numberButtons.forEach((button) => {
     button.addEventListener("click", () => {
-        if (operator === "" && firstNr === 0) {
+        if (operator === "" && firstNr === "0") {
             firstNr = button.id; // first digit of first number
-        } else if (operator === "" && firstNr !== 0) {
+        } else if (operator === "" && firstNr !== "0") {
             firstNr += button.id; // other digits of first number
         } else if (operator !== "" && secondNr === "") {
             secondNr = button.id; // first digit of second number
@@ -67,7 +65,7 @@ numberButtons.forEach((button) => {
             } else {
                 secondNr += button.id; // other digits of second number
             }
-        }
+        } 
         displayFirst.textContent = firstNr;
         displaySecond.textContent = secondNr;
     })
@@ -150,7 +148,7 @@ clearButton.addEventListener("click", () => {
 // reset firstNr:
 const resetFirst = () => {
     displayFirst.textContent = "0";
-    firstNr = 0;
+    firstNr = "0";
 }
 
 // reset secondNr:
@@ -159,45 +157,72 @@ const resetSecond = () => {
     secondNr = "";
 }
 
-// reset operator
-
+// reset operator:
 const resetOperator = () => {
     displayOperator.textContent = "";
     operator = "";
 }
 
-// reset result
-
+// reset result:
 const resetResult = () => {
     operationResult = "";
     displayResult.textContent = "";
 }
 
-// reset display style
-
+// reset display style (for the #display-numbers div):
 const displayStyleReset = () => {
     displayNumbers.style.color = "white";
     displayNumbers.style.fontSize = "4rem";
 }
 
-// ability to add commas
-
+// comma button functionality:
 const commaButton = document.querySelector("#comma");
 commaButton.addEventListener("click", () => {
+    firstNr = String(firstNr);
+    secondNr = String(secondNr);
+    operationResult = String(operationResult);
+
     if (operator === "" && !firstNr.includes(".")) { // adding comma to first number
         firstNr += ".";
         displayFirst.textContent = firstNr;
-    } else if (operator !== "" && secondNr !== "" && !secondNr.includes(".")) {
+    } else if (operator !== "" && secondNr !== "" && !secondNr.includes(".") && operationResult === "") { // adding commas to second number
         secondNr += ".";
         displaySecond.textContent = secondNr;
+    } /*else if (operationResult !== "" && !operationResult.includes(".")) {
+        operationResult += ".";
+        displayResult.textContent = operationResult;
+    } */
+})
+
+// delete button functionality:
+const deleteButton = document.querySelector("#del-button");
+deleteButton.addEventListener("click", () => {
+    if (firstNr !== "" && firstNr !== "0" && firstNr !== 0 && operator === "") { // deleting digits off the first number
+        firstNr = String(firstNr);
+        firstNr = firstNr.slice(0, -1);
+        displayFirst.textContent = firstNr;
+    } else if (operator !== "" && secondNr !== "" && operationResult === "") { // deleting digits off the second number
+        secondNr = String(secondNr);
+        secondNr = secondNr.slice(0, -1);
+        displaySecond.textContent = secondNr;
+    } else if (operationResult !== "") { // deleting digits off the end result;
+        firstNr = operationResult;
+        firstNr = String(firstNr);
+        firstNr = firstNr.slice(0, -1);
+
+        displayFirst.textContent = firstNr;
+        
+        resetOperator();
+        resetResult();
+        resetSecond();
+        displayStyleReset(); 
     }
 })
+
 
 /* 
 
 to add:
-
-- ability to add comma (but only 1 per number)
 
 - ability to delete digits
 
