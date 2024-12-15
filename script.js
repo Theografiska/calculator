@@ -171,6 +171,10 @@ const getResult = () => {
 
 /* 
 
-problems: 
+to add:
+
+- ability to add comma (but only 1 per number)
+
+- ability to delete digits
 
 */
