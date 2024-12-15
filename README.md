@@ -1,6 +1,8 @@
 # Basic Calculator
 
-This is a basic calculator built using JavaScript that performs basic arithmetic operations such as addition, subtraction, multiplication, and division. The calculator supports features like decimal point insertion, deleting digits, and resetting the input.
+This is a basic calculator built using JavaScript that performs basic arithmetic operations such as addition, subtraction, multiplication, and division. The calculator supports features like decimal point insertion, deleting digits, and resetting the input. 
+
+See the live version here: https://theografiska.github.io/calculator/.
 
 ![Calculator screenshot](Screenshot.png)
 
