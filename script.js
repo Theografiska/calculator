@@ -14,11 +14,7 @@ const multiplication = (firstNr, secondNr) => {
 }
 
 const division = (firstNr, secondNr) => {
-    if (secondNr === 0) {
-        return 'Error this, error that';
-    } else {
     return firstNr / secondNr;
-    }
 }
 
 // main function:
@@ -78,34 +74,33 @@ const operatorButtons = document.querySelectorAll(".operator-button");
 
 operatorButtons.forEach((button) => {
     button.addEventListener("click", () => {
+        const setOperator = () => {
+            operator = button.id;
+            displayOperator.textContent = operator;
+        }
+
         if (operator === "") {
-            operator = button.id;
-            displayOperator.textContent = operator;
+            setOperator(); // pressing operator when there's only firstNr
         } else if (operator !== "" && operationResult !== "") {
-            operateAfterResult();
-            operator = button.id;
-            displayOperator.textContent = operator;
+            operateAfterResult(); // continuing operating after the result
+            setOperator();
         } else if (operator !== "" && secondNo !== "" && operationResult === "") {
-            operateAgainBeforeResult();
-            operator = button.id;
-            displayOperator.textContent = operator;
+            operateAgainBeforeResult(); // continuing operating before the result
+            setOperator();
         } else if (secondNo === "") {
-            operator = button.id;
-            displayOperator.textContent = operator;
+            setOperator(); // ability to change operator before getting result
         }
     })
 })
 
-// continue operating before the result: 
-
+// continuing operating before the result
 const operateAgainBeforeResult = () => {
     getResult();
     firstNo = operationResult;
-    operationResult = "";
     displayFirst.textContent = firstNo;
 
-    secondNo = "";
-    displaySecond.textContent = "";
+    resetResult();
+    resetSecond();
 }
 
 // continue operating after the result:
@@ -113,36 +108,10 @@ const operateAfterResult = () => {
     firstNo = operationResult;
     displayFirst.textContent = firstNo;
 
-    secondNo = "";
-    displaySecond.textContent = "";
-
-    displayReset(); 
+    resetSecond();
+    resetResult();
+    displayStyleReset(); 
 }
-
-// reset display style: 
-
-const displayReset = () => {
-    displayNumbers.style.color = "white";
-    displayNumbers.style.fontSize = "4rem";
-    operationResult = "";
-    displayResult.textContent = "";
-}
-
-// clear button and listener:
-const clearButton = document.querySelector("#ac-button");
-
-clearButton.addEventListener("click", () => {
-    displayFirst.textContent = "0";
-    displayOperator.textContent = "";
-    displaySecond.textContent = "";
-    displayReset();
-
-    firstNo = 0;
-    operator = "";
-    secondNo = "";
-
-
-})
 
 // results button =
 
@@ -157,17 +126,57 @@ resultsButton.addEventListener("click", () => {
     }
 })
 
-/*const getResult = () => {
-    firstNo = Number(parseFloat(firstNo).toFixed(2));
-    secondNo = Number(parseFloat(secondNo).toFixed(2));
-    operationResult = operate(firstNo, operator, secondNo);
-}*/
-
 const getResult = () => {
     firstNo = Number(firstNo);
     secondNo = Number(secondNo);
     operationResult = operate(firstNo, operator, secondNo);
 }
+
+// clear button and listener:
+const clearButton = document.querySelector("#ac-button");
+
+clearButton.addEventListener("click", () => {
+    resetFirst();
+    resetSecond();
+    resetOperator();
+    resetResult();
+    displayStyleReset();
+})
+
+// reset firstNr:
+const resetFirst = () => {
+    displayFirst.textContent = "0";
+    firstNo = 0;
+}
+
+// reset secondNr:
+const resetSecond = () => {
+    displaySecond.textContent = "";
+    secondNo = "";
+}
+
+// reset operator
+
+const resetOperator = () => {
+    displayOperator.textContent = "";
+    operator = "";
+}
+
+// reset result
+
+const resetResult = () => {
+    operationResult = "";
+    displayResult.textContent = "";
+}
+
+// reset display style
+
+const displayStyleReset = () => {
+    displayNumbers.style.color = "white";
+    displayNumbers.style.fontSize = "4rem";
+}
+
+
 
 /* 
 
