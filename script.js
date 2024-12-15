@@ -35,12 +35,12 @@ const operate = (numberOne, operator, numberTwo) => {
     }
 }
 
-let firstNo = 0;
+let firstNr = 0;
 let operator = "";
-let secondNo = "";
+let secondNr = "";
 let operationResult = "";
 
-// div to hold all firstNo, operator, secondNo:
+// div to hold all firstNr, operator, secondNr:
 const displayNumbers = document.querySelector("#display-numbers");
 
 const displayFirst = document.querySelector("#display-first");
@@ -55,17 +55,21 @@ const numberButtons = document.querySelectorAll(".number-button");
 
 numberButtons.forEach((button) => {
     button.addEventListener("click", () => {
-        if (operator === "" && firstNo === 0) {
-            firstNo = button.id; // first digit of first number
-        } else if (operator === "" && firstNo !== 0) {
-            firstNo += button.id; // other digits of first number
-        } else if (operator !== "" && secondNo === "") {
-            secondNo = button.id; // first digit of second number
-        } else if (secondNo !== "" && operationResult === "") {
-            secondNo += button.id; // other digits of second number
+        if (operator === "" && firstNr === 0) {
+            firstNr = button.id; // first digit of first number
+        } else if (operator === "" && firstNr !== 0) {
+            firstNr += button.id; // other digits of first number
+        } else if (operator !== "" && secondNr === "") {
+            secondNr = button.id; // first digit of second number
+        } else if (secondNr !== "" && operationResult === "") {
+            if (secondNr === "0") {
+                secondNr = button.id; // if second number begins with 0, go back to changing first digit instead of adding more 
+            } else {
+                secondNr += button.id; // other digits of second number
+            }
         }
-        displayFirst.textContent = firstNo;
-        displaySecond.textContent = secondNo;
+        displayFirst.textContent = firstNr;
+        displaySecond.textContent = secondNr;
     })
 })
 
@@ -84,10 +88,10 @@ operatorButtons.forEach((button) => {
         } else if (operator !== "" && operationResult !== "") {
             operateAfterResult(); // continuing operating after the result
             setOperator();
-        } else if (operator !== "" && secondNo !== "" && operationResult === "") {
+        } else if (operator !== "" && secondNr !== "" && operationResult === "") {
             operateAgainBeforeResult(); // continuing operating before the result
             setOperator();
-        } else if (secondNo === "") {
+        } else if (secondNr === "") {
             setOperator(); // ability to change operator before getting result
         }
     })
@@ -96,8 +100,8 @@ operatorButtons.forEach((button) => {
 // continuing operating before the result
 const operateAgainBeforeResult = () => {
     getResult();
-    firstNo = operationResult;
-    displayFirst.textContent = firstNo;
+    firstNr = operationResult;
+    displayFirst.textContent = firstNr;
 
     resetResult();
     resetSecond();
@@ -105,8 +109,8 @@ const operateAgainBeforeResult = () => {
 
 // continue operating after the result:
 const operateAfterResult = () => {
-    firstNo = operationResult;
-    displayFirst.textContent = firstNo;
+    firstNr = operationResult;
+    displayFirst.textContent = firstNr;
 
     resetSecond();
     resetResult();
@@ -118,7 +122,7 @@ const operateAfterResult = () => {
 const resultsButton = document.querySelector("#results-button");
 
 resultsButton.addEventListener("click", () => {
-    if (operator !== "" && secondNo !== "") {
+    if (operator !== "" && secondNr !== "") {
         getResult();
         displayResult.textContent = operationResult;
         displayNumbers.style.color = "gray";
@@ -127,9 +131,9 @@ resultsButton.addEventListener("click", () => {
 })
 
 const getResult = () => {
-    firstNo = Number(firstNo);
-    secondNo = Number(secondNo);
-    operationResult = operate(firstNo, operator, secondNo);
+    firstNr = Number(firstNr);
+    secondNr = Number(secondNr);
+    operationResult = operate(firstNr, operator, secondNr);
 }
 
 // clear button and listener:
@@ -146,13 +150,13 @@ clearButton.addEventListener("click", () => {
 // reset firstNr:
 const resetFirst = () => {
     displayFirst.textContent = "0";
-    firstNo = 0;
+    firstNr = 0;
 }
 
 // reset secondNr:
 const resetSecond = () => {
     displaySecond.textContent = "";
-    secondNo = "";
+    secondNr = "";
 }
 
 // reset operator
@@ -176,7 +180,18 @@ const displayStyleReset = () => {
     displayNumbers.style.fontSize = "4rem";
 }
 
+// ability to add commas
 
+const commaButton = document.querySelector("#comma");
+commaButton.addEventListener("click", () => {
+    if (operator === "" && !firstNr.includes(".")) { // adding comma to first number
+        firstNr += ".";
+        displayFirst.textContent = firstNr;
+    } else if (operator !== "" && secondNr !== "" && !secondNr.includes(".")) {
+        secondNr += ".";
+        displaySecond.textContent = secondNr;
+    }
+})
 
 /* 
 
