@@ -13,6 +13,7 @@ body {
     align-items: center;
     margin: 0 auto;
     overflow: hidden;
+    font-family: "Courier Prime", monospace;
 }
 
 #calc-frame {
@@ -24,9 +25,10 @@ body {
     height: 50rem;
     width: 30rem;
     background: black;
-    border-radius: 2rem;
+    border: silver solid 3px;
+    border-radius: 1rem;
     color: white;
-    padding: 1.5rem;
+    padding: 1.75rem;
 }
 
 #calc-screen {
@@ -36,20 +38,33 @@ body {
     align-content: center;
     justify-content: end;
     height: 30%;
-    font-size: 4rem;
+    font-size: 3rem;
+    padding: 1rem 0.5rem;
 }
 
 #calc-screen div p {
     text-align: right;
 }
 
-#display-first, #display-second, #display-operaotr {
+#display-first, #display-second, #display-operator {
     display: inline-flex;
+    flex-wrap: wrap;
 }
 
 #display-numbers {
     display: flex;
-    justify-content: space-between;
+    justify-content: end;
+    flex-wrap: wrap;
+    font-family: "Roboto Mono", monospace;
+    font-weight: 100;
+}
+
+#display-result {
+    display: flex;
+    justify-content: end;
+    flex-wrap: wrap;
+    font-family: "Roboto Mono", monospace;
+    font-weight: 100;
 }
 
 #calc-button-area {
@@ -61,15 +76,8 @@ body {
 
 .button-row {
     display: flex;
+    margin-top: 0.5rem;
     gap: 0.75rem;
-}
-
-.right-side-button {
-    background-color: orange;
-}
-
-.top-side-button {
-    background-color: gray;
 }
 
 button {
@@ -77,21 +85,30 @@ button {
     padding: 1rem;
     height: 6rem;
     width: 6rem;
-    border-radius: 50%;
+    border-radius: 5%;
     cursor: pointer;
     border: 1px solid black;
+    background: linear-gradient(to bottom, #888, #555); /* Subtle gradient */
+    box-shadow: 0px 4px 0px #222, /* Main shadow for 3D effect */
+              inset 0px -1px 0px #666; /* Inner shadow for depth */
+}
+
+/* Subtle pressed state */
+button:active {
+    transform: translateY(2px); /* Slight downward movement */
+    box-shadow: 0px 1px 0px #222; /* Reduces shadow slightly */
 }
 
 #\30 { /* this is the unicode escape for number 0 */
     width: 50%;
-    border-radius: 45%;
+    border-radius: 5%;
     padding-left: 2rem;
     text-align: left;
 }
 
 #ac-button, #del-button {
-    width: 37.5%;
-    border-radius: 45%;
+    width: 36%;
+    border-radius: 5%;
 }
 
 footer {

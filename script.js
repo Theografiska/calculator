@@ -172,7 +172,7 @@ const resetResult = () => {
 // reset display style (for the #display-numbers div):
 const displayStyleReset = () => {
     displayNumbers.style.color = "white";
-    displayNumbers.style.fontSize = "4rem";
+    displayNumbers.style.fontSize = "3rem";
 }
 
 // comma button functionality:
