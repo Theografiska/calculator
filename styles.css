@@ -49,6 +49,7 @@ body {
 
 #display-numbers {
     display: flex;
+    justify-content: space-between;
 }
 
 #calc-button-area {
