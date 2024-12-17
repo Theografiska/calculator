@@ -53,22 +53,27 @@ const numberButtons = document.querySelectorAll(".number-button");
 
 numberButtons.forEach((button) => {
     button.addEventListener("click", () => {
+        makeString();
         if (operator === "" && firstNr === "0") {
             firstNr = button.id; // first digit of first number
-        } else if (operator === "" && firstNr !== "0") {
+        } else if (operator === "" && firstNr !== "0" && firstNr.length <= 12) {
             firstNr += button.id; // other digits of first number
         } else if (operator !== "" && secondNr === "") {
             secondNr = button.id; // first digit of second number
-        } else if (secondNr !== "" && operationResult === "") {
+        } else if (secondNr !== "" && operationResult === "" && secondNr.length <= 12) {
             if (secondNr === "0") {
                 secondNr = button.id; // if second number begins with 0, go back to changing first digit instead of adding more 
             } else {
                 secondNr += button.id; // other digits of second number
             }
-        } else if (operationResult !== "") { // ability to add numbers to the result number
-            operateAfterResult(); 
+        } else if (operationResult !== "" && operationResult.length <= 16) { // ability to add numbers to the result number
+            operationResult += button.id;
+            displayResult.textContent = operationResult;
+            firstNr = operationResult;
+            resetSecond();
             resetOperator();
-            firstNr += button.id;
+            resetResult();
+            displayStyleReset();
         }
         displayFirst.textContent = firstNr;
         displaySecond.textContent = secondNr;
@@ -107,13 +112,12 @@ resultsButton.addEventListener("click", () => {
         getResult();
         displayResult.textContent = operationResult;
         displayNumbers.style.color = "gray";
-        displayNumbers.style.fontSize = "2rem";
+        displayNumbers.style.fontSize = "1.5rem";
     }
 })
 
 const getResult = () => {
-    firstNr = Number(firstNr);
-    secondNr = Number(secondNr);
+    makeNumber();
     operationResult = operate(firstNr, operator, secondNr);
 }
 
@@ -174,24 +178,37 @@ const resetResult = () => {
 
 // function to reset display style (for the #display-numbers div):
 const displayStyleReset = () => {
-    displayNumbers.style.color = "white";
+    displayNumbers.style.color = "#dedede";
     displayNumbers.style.fontSize = "3rem";
+}
+
+// function to make a number into a string:
+
+const makeString = () => {
+    firstNr = String(firstNr);
+    secondNr = String(secondNr);
+    operationResult = String(operationResult);
+}
+
+// function to make a string into a number:
+
+const makeNumber = () => {
+    firstNr = Number(firstNr);
+    secondNr = Number(secondNr);
+    operationResult = Number(operationResult);
 }
 
 // comma button functionality:
 const commaButton = document.querySelector("#comma");
 commaButton.addEventListener("click", () => {
-    firstNr = String(firstNr);
-    secondNr = String(secondNr);
-    operationResult = String(operationResult);
-
+    makeString();
     if (operator === "" && !firstNr.includes(".")) { // adding comma to first number
         firstNr += ".";
         displayFirst.textContent = firstNr;
     } else if (operator !== "" && secondNr !== "" && !secondNr.includes(".") && operationResult === "") { // adding commas to second number
         secondNr += ".";
         displaySecond.textContent = secondNr;
-    } else if (operationResult !== "" && !operationResult.includes(".")) { // TEST: ability to add comma to the result number if there's ain't one
+    } else if (operationResult !== "" && !operationResult.includes(".") && operationResult.length <= 16) { // ability to add comma to the result number if there ain't one
         operationResult += ".";
         displayResult.textContent = operationResult;
     }
@@ -200,17 +217,15 @@ commaButton.addEventListener("click", () => {
 // delete button functionality:
 const deleteButton = document.querySelector("#del-button");
 deleteButton.addEventListener("click", () => {
-    if (firstNr !== "" && firstNr !== "0" && firstNr !== 0 && operator === "") { // deleting digits off the first number
-        firstNr = String(firstNr);
+    makeString();
+    if (firstNr !== "" && firstNr !== "0" && firstNr !== "0" && operator === "") { // deleting digits off the first number
         firstNr = firstNr.slice(0, -1);
         displayFirst.textContent = firstNr;
     } else if (operator !== "" && secondNr !== "" && operationResult === "") { // deleting digits off the second number
-        secondNr = String(secondNr);
         secondNr = secondNr.slice(0, -1);
         displaySecond.textContent = secondNr;
     } else if (operationResult !== "") { // deleting digits off the end result;
         firstNr = operationResult;
-        firstNr = String(firstNr);
         firstNr = firstNr.slice(0, -1);
 
         displayFirst.textContent = firstNr;
