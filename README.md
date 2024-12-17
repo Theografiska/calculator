@@ -4,7 +4,7 @@ This is a basic calculator built using JavaScript that performs basic arithmetic
 
 See the live version here: https://theografiska.github.io/calculator/.
 
-![Calculator screenshot](Screenshot.png)
+![Calculator screenshot](Screenshot.html.png)
 
 ## Features
 - **Addition**: Adds two numbers.
