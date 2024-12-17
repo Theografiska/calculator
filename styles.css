@@ -21,26 +21,37 @@ body {
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-end;
-    border: 1px solid black;
     height: 50rem;
     width: 30rem;
     background: black;
     border: silver solid 3px;
     border-radius: 1rem;
-    color: white;
+    color: #dedede;
     padding: 1.75rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+@media only screen and (max-width: 600px) {
+    #calc-frame {
+    }
+
+    button {
+    }
 }
 
 #calc-screen {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    align-content: center;
+    align-content: end;
     justify-content: end;
-    height: 30%;
+    width: 100%;
+    height: 27.5%;
     font-size: 3rem;
     padding: 1rem 0.5rem;
+    background-color: #222;
+    border-radius: 0.25rem;
+    overflow: hidden;
 }
 
 #calc-screen div p {
@@ -95,7 +106,6 @@ button {
               inset 0px -1px 0px #666; /* Inner shadow for depth */
 }
 
-/* Subtle pressed state */
 button:active {
     transform: translateY(2px); /* Slight downward movement */
     box-shadow: 0px 1px 0px #222; /* Reduces shadow slightly */

@@ -65,13 +65,17 @@ numberButtons.forEach((button) => {
             } else {
                 secondNr += button.id; // other digits of second number
             }
-        } 
+        } else if (operationResult !== "") { // ability to add numbers to the result number
+            operateAfterResult(); 
+            resetOperator();
+            firstNr += button.id;
+        }
         displayFirst.textContent = firstNr;
         displaySecond.textContent = secondNr;
     })
 })
 
-// operator buttons and listener:
+// operator buttons' listener:
 const operatorButtons = document.querySelectorAll(".operator-button");
 
 operatorButtons.forEach((button) => {
@@ -80,7 +84,6 @@ operatorButtons.forEach((button) => {
             operator = button.id;
             displayOperator.textContent = operator;
         }
-
         if (operator === "") {
             setOperator(); // pressing operator when there's only firstNr
         } else if (operator !== "" && operationResult !== "") {
@@ -91,31 +94,11 @@ operatorButtons.forEach((button) => {
             setOperator();
         } else if (secondNr === "") {
             setOperator(); // ability to change operator before getting result
-        }
+        } 
     })
 })
 
-// continuing operating before the result
-const operateAgainBeforeResult = () => {
-    getResult();
-    firstNr = operationResult;
-    displayFirst.textContent = firstNr;
-
-    resetResult();
-    resetSecond();
-}
-
-// continue operating after the result:
-const operateAfterResult = () => {
-    firstNr = operationResult;
-    displayFirst.textContent = firstNr;
-
-    resetSecond();
-    resetResult();
-    displayStyleReset(); 
-}
-
-// results button =
+// results button and function to get the result:
 
 const resultsButton = document.querySelector("#results-button");
 
@@ -134,7 +117,27 @@ const getResult = () => {
     operationResult = operate(firstNr, operator, secondNr);
 }
 
-// clear button and listener:
+// function to continue operating before the result (for example, 4+5+6 shows 9+6 after completing first sum)
+const operateAgainBeforeResult = () => {
+    getResult();
+    firstNr = operationResult;
+    displayFirst.textContent = firstNr;
+
+    resetResult();
+    resetSecond();
+}
+
+// function to continue operating after the result:
+const operateAfterResult = () => {
+    firstNr = operationResult;
+    displayFirst.textContent = firstNr;
+
+    resetSecond();
+    resetResult();
+    displayStyleReset(); 
+}
+
+// function to clear button and listener:
 const clearButton = document.querySelector("#ac-button");
 
 clearButton.addEventListener("click", () => {
@@ -145,31 +148,31 @@ clearButton.addEventListener("click", () => {
     displayStyleReset();
 })
 
-// reset firstNr:
+// function to reset firstNr:
 const resetFirst = () => {
     displayFirst.textContent = "0";
     firstNr = "0";
 }
 
-// reset secondNr:
+// function toreset secondNr:
 const resetSecond = () => {
     displaySecond.textContent = "";
     secondNr = "";
 }
 
-// reset operator:
+// function to reset operator:
 const resetOperator = () => {
     displayOperator.textContent = "";
     operator = "";
 }
 
-// reset result:
+// function to reset result:
 const resetResult = () => {
     operationResult = "";
     displayResult.textContent = "";
 }
 
-// reset display style (for the #display-numbers div):
+// function to reset display style (for the #display-numbers div):
 const displayStyleReset = () => {
     displayNumbers.style.color = "white";
     displayNumbers.style.fontSize = "3rem";
@@ -188,10 +191,10 @@ commaButton.addEventListener("click", () => {
     } else if (operator !== "" && secondNr !== "" && !secondNr.includes(".") && operationResult === "") { // adding commas to second number
         secondNr += ".";
         displaySecond.textContent = secondNr;
-    } /*else if (operationResult !== "" && !operationResult.includes(".")) {
+    } else if (operationResult !== "" && !operationResult.includes(".")) { // TEST: ability to add comma to the result number if there's ain't one
         operationResult += ".";
         displayResult.textContent = operationResult;
-    } */
+    }
 })
 
 // delete button functionality:
