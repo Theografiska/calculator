@@ -24,11 +24,15 @@ const operate = (numberOne, operator, numberTwo) => {
         case '-':
             return parseFloat(subtraction(numberOne, numberTwo).toFixed(2));
             break;
-        case 'x':
+        case '*':
             return parseFloat(multiplication(numberOne, numberTwo).toFixed(2));
             break;
         case '/':
-            return parseFloat(division(numberOne, numberTwo).toFixed(2));
+            if (numberTwo === 0) {
+                return 'Heh,gotcha';
+            } else {
+                return parseFloat(division(numberOne, numberTwo).toFixed(2));
+            }
             break;
     }
 }
